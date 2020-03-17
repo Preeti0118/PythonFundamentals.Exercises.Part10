@@ -1,37 +1,19 @@
 import pickle
 
-class persistenceutils:
+class Persistenceutils:
     def __init__(self):
         pass
 
-    def write_pickle(self):
-        db = {}
-        for data in customer:
-            db['customerdb'] = data
-            dbfile = open('custdata', 'ab')
-            pickle.dump(db, dbfile)
-            dbfile.close()
+    @staticmethod
+    def write_pickle(file_path, data):
+        with open(file_path,'wb') as handler:
+            pickle.dump(data, handler)
+        
+    def load_pickle(file_path):
+        with open(file_path, 'rb') as handler:
+            data = pickle.load(handler)
 
-        db = {}
-        for data in account:
-            db['accountdb'] = data
-            dbfile = open('accountdata', 'ab')
-            pickle.dump(db, dbfile)
-            dbfile.close()
-
-    def load_pickle(self):
-        dbfile = open('bankdata','rb')
-        db = pickle.load(dbfile)
-        print('this is load data')
-        print(dbfile)
-        for keys in db:
-            print(keys,'=>',db[keys])
-            dbfile.close()
-
-
-
-
-
+            
 class person:
 
     def __init__(self, custid, first_name, last_name):
@@ -88,10 +70,12 @@ class bank:
 
 
     def save_data(self):
-        pass
+        Persistenceutils.write_pickle("customers.pickle",self.customers)
+        Persistenceutils.write_pickle("accounts.pickle",self.accounts)
 
     def load_data(self):
-        pass
+        self.customers = Persistenceutils.load_pickle("customers.pickle")
+        sel.accounts = Persistenceutils.load_pickle("accounts.pickkle")
 
 
 #initial declaration
