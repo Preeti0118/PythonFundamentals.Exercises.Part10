@@ -1,3 +1,35 @@
+import pickle
+
+
+class persistenceutils:
+    def __init__(self):
+        pass
+
+    def write_pickle(self):
+        db = {}
+        for data in customer:
+            db['customerdb'] = data
+            dbfile = open('custdata', 'ab')
+            pickle.dump(db, dbfile)
+            dbfile.close()
+
+        db = {}
+        for data in account:
+            db['accountdb'] = data
+            dbfile = open('accountdata', 'ab')
+            pickle.dump(db, dbfile)
+            dbfile.close()
+
+    def load_pickle(self):
+        dbfile = open('bankdata', 'rb')
+        db = pickle.load(dbfile)
+        print('this is load data')
+        print(dbfile)
+        for keys in db:
+            print(keys, '=>', db[keys])
+            dbfile.close()
+
+
 class person:
 
     def __init__(self, custid, first_name, last_name):
@@ -50,6 +82,12 @@ class bank:
     def balance_inquiry(self, account):
         print("Your balance is - ", accounts[account][2])
 
+    def save_data(self):
+        pass
+
+    def load_data(self):
+        pass
+
 
 # initial declaration
 customer = {}  # Create empty customer dictionary
@@ -78,3 +116,11 @@ transact_bank.withdraw_money(account1.number, 2000)
 
 # balance inquiry
 transact_bank.balance_inquiry(account1.number)
+
+# Instantiate class for poersisting data
+p = persistenceutils
+# download data
+p.write_pickle(self)
+
+# load data
+p.load_data()
