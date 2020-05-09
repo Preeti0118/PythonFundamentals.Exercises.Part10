@@ -6,3 +6,4 @@ __pycache__
 *pyc
 *.ipynb_checkpoints
 custdata
+persistent_small_town_teller_old.py
